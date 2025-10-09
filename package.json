@@ -1,0 +1,20 @@
+{
+  "name": "droid-factory",
+  "version": "0.0.1",
+  "description": "Install custom Factory Droid subagents and delegate work using custom slash commands.",
+  "bin": {
+    "droid-factory": "./bin/droid-factory.js"
+  },
+  "files": [
+    "bin",
+    "templates"
+  ],
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
