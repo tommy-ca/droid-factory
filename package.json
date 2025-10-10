@@ -1,6 +1,6 @@
 {
   "name": "droid-factory",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Install custom Factory Droid subagents and delegate work using custom slash commands.",
   "bin": {
     "droid-factory": "./bin/droid-factory.js"
@@ -16,5 +16,8 @@
   },
   "engines": {
     "node": ">=16"
+  },
+  "dependencies": {
+    "enquirer": "^2.3.6"
   }
 }
