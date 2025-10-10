@@ -19,6 +19,7 @@
     "node": ">=16"
   },
   "dependencies": {
-    "enquirer": "^2.3.6"
+    "enquirer": "^2.3.6",
+    "gray-matter": "^4.0.3"
   }
 }
