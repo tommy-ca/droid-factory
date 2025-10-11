@@ -17,12 +17,22 @@ Ensure **Custom Droids** are enabled in Factory (`/settings` → Experimental �
 
 ### Guided flow
 
-- Step 1: Choose install location — Personal (`~/.factory`) or Project (`./.factory`)
-- Step 2: Install everything? — Yes installs all; No lets you pick
-- Step 3: Select commands — existing items are labeled `(installed)` and preselected; Space toggles, Enter confirms
-- Step 4: Select droids — same behavior as commands
-- Overwrite: choose whether to overwrite existing files or skip them
-- Summary: shows the target path, what was created/overwritten/skipped, and next steps to reload commands
+- Step 1/6 — Choose install location (Personal `~/.factory` or Project `./.factory`)
+- Step 2/6 — Choose source (Templates or Marketplace)
+
+Templates (bundled):
+- Step 3/6 — Install all commands and droids?
+- Step 4/6 — Select commands to install
+- Step 5/6 — Select droids to install
+- Step 6/6 — Overwrite existing files if found?
+- Summary shows what was created/overwritten/skipped and next steps
+
+Marketplace:
+- Step 3/6 — Enter marketplace (path/url/owner/repo)
+- Step 4/6 — Install all plugins?
+- Step 5/6 — Select plugins to install
+- Step 6/6 — Overwrite existing files if found?
+- Summary shows what was created/overwritten/skipped and next steps
 
 ### Optional flags (non-interactive)
 
@@ -33,7 +43,8 @@ Ensure **Custom Droids** are enabled in Factory (`/settings` → Experimental �
 - `--only-commands`, `--only-droids` — limit to one type
 - `--force` — overwrite existing files
 - `--list` — list available templates
-- `--verbose` — print the detailed plan (even in guided mode)
+- `--verbose` — print the detailed plan
+- Marketplace: `--marketplace <path|url|owner/repo>`, `--plugins all|name1,name2`, `--import marketplace|templates`, `--ref <branch-or-tag>`, `--debug`
 
 ## Contributing commands or droids
 

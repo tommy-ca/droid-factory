@@ -1,6 +1,6 @@
 {
   "name": "droid-factory",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Install custom Factory Droid subagents and delegate work using custom slash commands.",
   "bin": {
     "droid-factory": "./bin/droid-factory.js"
