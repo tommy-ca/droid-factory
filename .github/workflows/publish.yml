@@ -1,0 +1,56 @@
+name: "release: npm publish"
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - package.json
+  workflow_dispatch:
+
+jobs:
+  publish:
+    if: github.repository_owner == 'iannuttall'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - name: Install deps (no lockfile)
+        run: npm install --ignore-scripts --no-audit --no-fund
+
+      - name: Determine if publish is needed
+        id: check
+        run: |
+          PKG_NAME=$(node -p "require('./package.json').name")
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          NPM_VERSION=$(npm view "$PKG_NAME" version || echo '0.0.0')
+          echo "pkg_version=$PKG_VERSION" >> $GITHUB_OUTPUT
+          echo "npm_version=$NPM_VERSION" >> $GITHUB_OUTPUT
+          if [ "$PKG_VERSION" = "$NPM_VERSION" ]; then
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Mask token
+        if: steps.check.outputs.should_publish == 'true'
+        run: echo "::add-mask::${{ secrets.NPM_TOKEN }}"
+
+      - name: Publish to npm
+        if: steps.check.outputs.should_publish == 'true'
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Skip publish (version already on npm)
+        if: steps.check.outputs.should_publish != 'true'
+        run: echo "Version ${{ steps.check.outputs.pkg_version }} already published as ${{ steps.check.outputs.npm_version }}; skipping."

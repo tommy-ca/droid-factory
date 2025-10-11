@@ -12,6 +12,7 @@
   ],
   "license": "MIT",
   "private": false,
+  "repository": "https://github.com/iannuttall/droid-factory",
   "publishConfig": {
     "access": "public"
   },
