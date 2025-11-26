@@ -51,8 +51,54 @@ Marketplace:
 
 **Commands** (`.factory/commands/`) — Custom slash commands for Factory
 **Droids** (`.factory/droids/`) — Custom subagents (mapped from Claude Code agents)
-**Hooks** (`.factory/hooks/`) — Lifecycle hooks
+**Hooks** (`.factory/hooks/`) — Lifecycle hook scripts and definitions
 **Skills** (`.factory/skills/`) — Directory-based skills with SKILL.md
+
+#### Installing Hooks
+
+Marketplace plugins can include hooks that you install to `.factory/hooks/`:
+
+```bash
+# Install all hooks from a plugin
+npx droid-factory --marketplace EveryInc/every-marketplace \
+  --plugins compounding-engineering \
+  --hooks all
+
+# Install specific hooks
+npx droid-factory --hooks pre-commit,post-install
+
+# Install only hooks (skip commands, droids, skills)
+npx droid-factory --only-hooks
+```
+
+#### Using Installed Hooks
+
+After installing hooks to `.factory/hooks/`, reference them in your Factory Droid settings:
+
+1. Open `~/.factory/settings.json`
+2. Add hook configuration:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/user/.factory/hooks/pre-commit.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+3. Enable hooks in Factory Droid: `/settings` → "Hooks" → "Enabled"
+
+See the [Factory Droid Hooks Guide](https://docs.factory.ai/cli/configuration/hooks-guide) for details on hook events and matchers.
 
 ## Contributing commands or droids
 
