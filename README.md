@@ -1,6 +1,6 @@
 # Droid Factory install
 
-Install custom Factory Droid subagents and delegate work using custom slash commands with a single `npx droid-factory` (or `bunx droid-factory`) call. By default it launches a guided, step‑by‑step installer where you pick the install location (personal or project) and choose which commands and droids to install; flags are available for non‑interactive “install everything” runs.
+Install custom Factory Droid subagents, slash commands, hooks, and skills with a single `npx droid-factory` (or `bunx droid-factory`) call. By default it launches a guided, step‑by‑step installer where you pick the install location (personal or project) and choose which resources to install; flags are available for non‑interactive "install everything" runs.
 
 ## Usage
 
@@ -39,12 +39,20 @@ Marketplace:
 - `--yes` — run without interactive confirmations
 - `--dry-run` — preview actions and summary without writing files
 - `--scope personal|project` and `--path <repo-root>` — target install location
-- `--commands all|name1,name2` and `--droids all|name1,name2` — select what to install
-- `--only-commands`, `--only-droids` — limit to one type
+- `--commands all|name1,name2`, `--droids all|name1,name2`, `--hooks all|name1,name2`, `--skills all|name1,name2` — select what to install
+- `--only-commands`, `--only-droids`, `--only-hooks`, `--only-skills` — limit to one type
+- `--no-commands`, `--no-droids`, `--no-hooks`, `--no-skills` — exclude specific types
 - `--force` — overwrite existing files
 - `--list` — list available templates
 - `--verbose` — print the detailed plan
 - Marketplace: `--marketplace <path|url|owner/repo>`, `--plugins all|name1,name2`, `--import marketplace|templates`, `--ref <branch-or-tag>`, `--debug`
+
+### Resource Types
+
+**Commands** (`.factory/commands/`) — Custom slash commands for Factory
+**Droids** (`.factory/droids/`) — Custom subagents (mapped from Claude Code agents)
+**Hooks** (`.factory/hooks/`) — Lifecycle hooks
+**Skills** (`.factory/skills/`) — Directory-based skills with SKILL.md
 
 ## Contributing commands or droids
 
